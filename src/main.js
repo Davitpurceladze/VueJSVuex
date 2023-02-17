@@ -11,7 +11,8 @@ const store = createStore({
       counter: 0,
     };
   },
-  //we have acces on mutation in whole app with commit uilt in method
+  //we have acces on mutation in whole app with
+  //commit uilt in method
   mutations: {
     increment(state) {
       state.counter = state.counter + 1;
