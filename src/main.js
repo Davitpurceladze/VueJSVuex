@@ -1,3 +1,4 @@
+import { setTimeout } from 'core-js';
 import { createApp } from 'vue';
 import { createStore } from 'vuex';
 
@@ -19,6 +20,21 @@ const store = createStore({
     },
     increase(state, payload) {
       state.counter = state.counter + payload.value;
+    },
+  },
+  //good practise is to use actions between component and mutations
+  //because mutation is syncronous and action are asyncronous
+  //we can call dispatch() inside of actions to call other action
+  //thats sound good when using http requests,
+  //we also cann use getters and state inside actions
+  actions: {
+    increment(context) {
+      setTimeout(function () {
+        context.commit('increment');
+      }, 2000);
+    },
+    increase(context, payload) {
+      context.commit('increase', payload);
     },
   },
   //getters are like methods but we are using them in mutations

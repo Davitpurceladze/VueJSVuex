@@ -25,7 +25,8 @@ export default {
     addOne() {
       // commit can pass second data wich will be accepted in
       // mutations
-      this.$store.commit('increase', { value: 10 });
+      this.$store.dispatch('increase', { value: 10 });
+      //dispatch calls actions and works like commit
     },
   },
 };

@@ -8,7 +8,7 @@ export default {
     addOne() {
       //commit is build in method wich store gives us and
       //'increment is name of the method in mutations(state)'
-      this.$store.commit('increment');
+      this.$store.dispatch('increment');
     },
   },
 };
