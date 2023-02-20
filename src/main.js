@@ -42,7 +42,7 @@ const store = createStore({
   //we can use getter in any component in whole app
   getters: {
     finalCounter(state) {
-      return state.counter * 6;
+      return state.counter;
     },
     normalizedCounter(_, getters) {
       const finalCounter = getters.finalCounter;

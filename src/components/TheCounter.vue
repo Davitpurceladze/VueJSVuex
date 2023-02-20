@@ -1,5 +1,5 @@
 <template>
-  <h3>{{ finalCounter }}</h3>
+  <h3>{{ count }}</h3>
 </template>
 
 <script>
@@ -12,7 +12,11 @@ export default {
     //   return this.$store.getters.finalCounter;
     // },
 
-    ...mapGetters(['finalCounter']), // ...mapGetters([]) in the aray we can use any name of getter in string and use it in this component
+    // ...mapGetters(['finalCounter']), //we use inside computed:{}  ...mapGetters([]) in the aray we can use any name of getter in string and use it in this component
+    ...mapGetters({
+      // we can describe our custom names for getter in state
+      count: 'finalCounter',
+    }),
   },
 };
 </script>
