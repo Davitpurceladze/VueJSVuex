@@ -10,6 +10,7 @@ const store = createStore({
   state() {
     return {
       counter: 0,
+      userAuthentication: false,
     };
   },
   //we have acces on mutation in whole app with
@@ -20,6 +21,12 @@ const store = createStore({
     },
     increase(state, payload) {
       state.counter = state.counter + payload.value;
+    },
+    authoriseUser(state) {
+      state.userAuthentication = true;
+    },
+    unautoriseUser(state) {
+      state.userAuthentication = false;
     },
   },
   //good practise is to use actions between component and mutations
@@ -35,6 +42,12 @@ const store = createStore({
     },
     increase(context, payload) {
       context.commit('increase', payload);
+    },
+    authoriseUser(context) {
+      context.commit('authoriseUser');
+    },
+    unautoriseUser(context) {
+      context.commit('unautoriseUser');
     },
   },
   //getters are like methods but we are using them in mutations
@@ -53,6 +66,9 @@ const store = createStore({
         return 100;
       }
       return finalCounter;
+    },
+    userVerification(state) {
+      return state.userAuthentication;
     },
   },
 });
