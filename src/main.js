@@ -18,6 +18,7 @@ const counterModule = {
       state.counter = state.counter + 1;
     },
     increase(state, payload) {
+      console.log(state);
       state.counter = state.counter + payload.value;
     },
   },
@@ -31,7 +32,13 @@ const counterModule = {
       context.commit('increase', payload);
     },
   },
+
   getters: {
+    // inside modules, inside localstates we only have acces to
+    //counterModule localStates, same for
+    //getters(state), actions(context), mutations(state)
+    //in case we need to work in getters we can get rootState , rootGetters
+
     finalCounter(state) {
       return state.counter;
     },
