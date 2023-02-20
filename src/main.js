@@ -8,6 +8,9 @@ import App from './App.vue';
 //this counterModule contains all data and logic what asosiated
 //with counter
 const counterModule = {
+  // namespaced: true, setting namespaced to true means that this module is now local and isnt part of main state
+  //now to acces this state in or components see example in FavoriteValue.vue component
+  //example for ...mapGetters see in TheCounter.vue
   state() {
     return {
       counter: 0,

@@ -13,6 +13,8 @@ export default {
     // },
 
     // ...mapGetters(['finalCounter']), //we use inside computed:{}  ...mapGetters([]) in the aray we can use any name of getter in string and use it in this component
+    // if this mapgetters is local (namespaced:true) we can do
+    // ...mapGetters('numbers'{})
     ...mapGetters({
       // we can describe our custom names for getter in state
       count: 'finalCounter',
