@@ -4,17 +4,15 @@ import { createStore } from 'vuex';
 
 import App from './App.vue';
 
-// we can create global state(store) with help of vuex and use it
-//through entire app,
-const store = createStore({
+//create object to split logic for state
+//this counterModule contains all data and logic what asosiated
+//with counter
+const counterModule = {
   state() {
     return {
       counter: 0,
-      userAuthentication: false,
     };
   },
-  //we have acces on mutation in whole app with
-  //commit built in method
   mutations: {
     increment(state) {
       state.counter = state.counter + 1;
@@ -22,18 +20,7 @@ const store = createStore({
     increase(state, payload) {
       state.counter = state.counter + payload.value;
     },
-    authoriseUser(state) {
-      state.userAuthentication = true;
-    },
-    unautoriseUser(state) {
-      state.userAuthentication = false;
-    },
   },
-  //good practise is to use actions between component and mutations
-  //because mutation is syncronous and action are asyncronous
-  //we can call dispatch() inside of actions to call other action
-  //thats sound good when using http requests,
-  //we also cann use getters and state inside actions
   actions: {
     increment(context) {
       setTimeout(function () {
@@ -43,16 +30,7 @@ const store = createStore({
     increase(context, payload) {
       context.commit('increase', payload);
     },
-    authoriseUser(context) {
-      context.commit('authoriseUser');
-    },
-    unautoriseUser(context) {
-      context.commit('unautoriseUser');
-    },
   },
-  //getters are like methods but we are using them in mutations
-  //getters get 2 arguments first-state, second getter,
-  //we can use getter in any component in whole app
   getters: {
     finalCounter(state) {
       return state.counter;
@@ -67,6 +45,50 @@ const store = createStore({
       }
       return finalCounter;
     },
+  },
+};
+
+// we can create global state(store) with help of vuex and use it
+//through entire app,
+const store = createStore({
+  //createStore has acces to modules: {} wich is object and we can
+  //use same names as before to use dispatch and appGetters and so on
+  //because by default, modules merged into store
+  modules: {
+    numbers: counterModule,
+  },
+  state() {
+    return {
+      userAuthentication: false,
+    };
+  },
+  //we have acces on mutation in whole app with
+  //commit built in method
+  mutations: {
+    authoriseUser(state) {
+      state.userAuthentication = true;
+    },
+    unautoriseUser(state) {
+      state.userAuthentication = false;
+    },
+  },
+  //good practise is to use actions between component and mutations
+  //because mutation is syncronous and action are asyncronous
+  //we can call dispatch() inside of actions to call other action
+  //thats sound good when using http requests,
+  //we also cann use getters and state inside actions
+  actions: {
+    authoriseUser(context) {
+      context.commit('authoriseUser');
+    },
+    unautoriseUser(context) {
+      context.commit('unautoriseUser');
+    },
+  },
+  //getters are like methods but we are using them in mutations
+  //getters get 2 arguments first-state, second getter,
+  //we can use getter in any component in whole app
+  getters: {
     userVerification(state) {
       return state.userAuthentication;
     },
